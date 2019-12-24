@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "mail.service.recipients",
+      "type": "java.lang.String",
+      "description": "Comma separated list of recipients."
+  }
+] }
