@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
         popUpClose = document.querySelector('.pop-up-close'),
         popUpButtons = document.querySelectorAll('.open-popup'),
         wrapper = document.querySelector('.wrapper'),
-        forms = document.querySelectorAll('.form');
+        forms = document.querySelectorAll('.form'),
+        reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
     popUpButtons.forEach(item => item.addEventListener('click', () => {
         popUp.classList.toggle('pop-up-active');
@@ -75,26 +76,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     forms.forEach(item => item.addEventListener('submit', function (e) {
         e.preventDefault();
-
-        let formData = new FormData(this);
-        formData = Object.fromEntries(formData);
-        console.log(formData)
-        ajaxSend(formData);
-        this.reset();
+        let formValue = item.querySelector('.email').value;
+        if (reg.test(formValue) == false) {
+            alert('Please, enter a valid e-mail');
+            return false;
+        } else {
+            let formData = new FormData(this);
+            formData = Object.fromEntries(formData);
+            ajaxSend(formData);
+            this.reset();
+        }
     }));
 
+    
 })
 
 const ajaxSend = (formData) => {
-    fetch('http://localhost:8081/api/v1/landing/send', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
+    fetch("http://localhost:8081/api/v1/landing/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
     })
-        .then(response => alert('Success'))
-        .catch(error => console.error(error))
+      .then(response => alert("Message sent"))
+      .catch(error => console.error(error));
 };
 
 function animation(duration) {
