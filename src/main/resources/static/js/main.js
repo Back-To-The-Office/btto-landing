@@ -75,26 +75,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     forms.forEach(item => item.addEventListener('submit', function (e) {
         e.preventDefault();
-
-        let formData = new FormData(this);
-        formData = Object.fromEntries(formData);
-        console.log(formData)
-        ajaxSend(formData);
-        this.reset();
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        var formValue = item.querySelector('.email').value;
+        if (reg.test(formValue) == false) {
+            alert('Введите корректный e-mail');
+            return false;
+        } else {
+            let formData = new FormData(this);
+            formData = Object.fromEntries(formData);
+            console.log(formData)
+            ajaxSend(formData);
+            this.reset();
+        }
     }));
 
+    
 })
 
 const ajaxSend = (formData) => {
-    fetch('http://localhost:8081/api/v1/landing/send', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
+    fetch("http://localhost:8081/api/v1/landing/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
     })
-        .then(response => alert('Success'))
-        .catch(error => console.error(error))
+      .then(response => alert("Сообщение отправлено"))
+      .catch(error => console.error(error));
 };
 
 function animation(duration) {
