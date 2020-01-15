@@ -34,6 +34,11 @@ public class SubscriberController {
         mailSenderExecutorService = null;
     }
 
+    @GetMapping("test")
+    public String test() {
+        return "success";
+    }
+
     @PostMapping("send")
     public String sendSubscriber(@Valid @RequestBody final SubscriberRequest subscriberRequest) {
         final StringBuilder mailBody = new StringBuilder("name: " + subscriberRequest.getName() + "\nemail: " + subscriberRequest.getEmail());

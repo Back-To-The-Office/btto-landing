@@ -50,7 +50,20 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+				</configuration>
 			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>com.google.appengine</groupId>-->
+<!--				<artifactId>appengine-maven-plugin</artifactId>-->
+<!--				<version>1.9.77</version>-->
+<!--				<configuration>-->
+<!--					<project>btto-landing</project>-->
+<!--					<appId>btto_landing</appId>-->
+<!--					<version>alpha-01</version>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 

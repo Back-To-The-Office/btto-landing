@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const ajaxSend = (formData) => {
-    fetch('http://localhost:8081/api/v1/landing/send', {
+    fetch('/api/v1/landing/send', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
