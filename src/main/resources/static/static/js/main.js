@@ -19,8 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         statusMessages = document.querySelectorAll('.message-status')
         reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
-    const MAIN_URL = 'http://localhost:8081';
-
     popUpButtons.forEach(item => item.addEventListener('click', () => {
         togglePopUp();
     }));
@@ -121,20 +119,20 @@ document.addEventListener('DOMContentLoaded', () => {
             message = Array.from(statusMessages).filter(message => message.classList.contains('message-status--error'))[0];
             showMessage(message);
         }
-    };
+    }
 
     function delay(ms) {
         return new Promise(r => setTimeout(() => r(), ms));
-    };
+    }
 
     async function showMessage(message) {
         message.classList.add('active');
         await delay(4000);
         message.classList.remove('active');
-    };
+    }
 
     function ajaxSend(formData) {
-        fetch(`${MAIN_URL}/api/v1/landing/send`, {
+        fetch(`/api/v1/landing/send`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -143,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
           .then(response => callMessage(true))
           .catch(error => callMessage(false));
-    };
+    }
 
     function animation(duration) {
         let temp;
@@ -159,6 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 1 > progress && (temp = requestAnimationFrame(step))
             })
         }
-    };
+    }
 
 })
