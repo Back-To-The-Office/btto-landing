@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     window.addEventListener('click', event => {
-        if (popUp.classList.contains('pop-up-active') && event.target == wrapper) {
+        if (popUp.classList.contains('pop-up-active') && event.target === wrapper) {
             togglePopUp();
         }
     });
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             focusInput(input);
         });
         input.addEventListener('focusout', () => {
-            if (input.value == false) {
+            if (input.value === false) {
                 unfocusInput(input);
             }
         })
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let inputs = item.querySelectorAll('.form__input'),
             textarea = item.querySelector('.contacts-form__textarea'),
             formValue = item.querySelector('.email').value;
-        if (reg.test(formValue) == false) {
+        if (reg.test(formValue) === false) {
             callMessage(false, true);
             return false;
         } else {
@@ -120,17 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
             showMessage(message);
         }
     };
-    
+
     const delay = ms => {
         return new Promise(r => setTimeout(() => r(), ms));
     };
-    
+
     const showMessage = async message => {
         message.classList.add('active');
         await delay(4000);
         message.classList.remove('active');
     };
-    
+
     const ajaxSend = formData => {
         fetch("http://localhost:8081/api/v1/landing/send", {
           method: "POST",
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
           .then(response => callMessage(true))
           .catch(error => callMessage(false));
     };
-    
+
     const animation = duration => {
         let temp;
         return sel => {
@@ -158,6 +158,5 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         }
     };
-    
-})
 
+})

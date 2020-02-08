@@ -3750,7 +3750,8 @@ footer {
 }
 .product-info__right {
   position: relative;
-  width: 44%;
+  width: 100%;
+  max-width: 400px;
 }
 @media screen and (max-width: 960px) {
   .product-info__right {
