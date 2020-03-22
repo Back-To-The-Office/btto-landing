@@ -10,4 +10,10 @@ public class LandingController {
     public String main() {
         return "index.html";
     }
+
+    @SuppressWarnings("SpringMVCViewInspection")
+    @GetMapping("/policy")
+    public String policy() {
+        return "policy.html";
+    }
 }
