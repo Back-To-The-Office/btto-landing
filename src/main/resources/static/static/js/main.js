@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     svg4everybody({});
     let scrollItems = [
         document.querySelector('.product-info__more'),
-        document.querySelector('.header-logo'),
+        ...document.querySelectorAll('.service-logo'),
         ...document.querySelectorAll('.header-nav__link')
     ],
         functionsTabs = document.querySelectorAll('.functions-tab'),
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     window.addEventListener('click', event => {
-        if (popUp.classList.contains('pop-up-active') && event.target === wrapper) {
+        if (popUp.classList.contains('pop-up-active') && event.target == wrapper) {
             togglePopUp();
         }
     });
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             focusInput(input);
         });
         input.addEventListener('focusout', () => {
-            if (input.value === false) {
+            if (input.value == false) {
                 unfocusInput(input);
             }
         })
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     textArea.addEventListener('focusout', () => {
-        if (textArea.value === false) {
+        if (textArea.value == false) {
             unfocusInput(textArea, true);
         }
     });
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let inputs = item.querySelectorAll('.form__input'),
             textarea = item.querySelector('.contacts-form__textarea'),
             formValue = item.querySelector('.email').value;
-        if (reg.test(formValue) === false) {
+        if (reg.test(formValue) == false) {
             callMessage(false, true);
             return false;
         } else {
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (textarea) {
                 unfocusInput(textarea, true)
             }
-            togglePopUp();
+            closePopUp();
 
             let formData = new FormData(this);
             formData = Object.fromEntries(formData);
@@ -107,6 +107,11 @@ document.addEventListener('DOMContentLoaded', () => {
         wrapper.classList.toggle('pop-up-active');
     }
 
+    function closePopUp() {
+        popUp.classList.remove('pop-up-active');
+        wrapper.classList.remove('pop-up-active');
+    }
+
     function callMessage(succsessStatus, valid = false) {
         let message;
         if (valid) {
@@ -120,19 +125,19 @@ document.addEventListener('DOMContentLoaded', () => {
             showMessage(message);
         }
     }
-
+    
     function delay(ms) {
         return new Promise(r => setTimeout(() => r(), ms));
     }
-
+    
     async function showMessage(message) {
         message.classList.add('active');
         await delay(4000);
         message.classList.remove('active');
     }
-
+    
     function ajaxSend(formData) {
-        fetch(`/api/v1/landing/send`, {
+        fetch('/api/v1/landing/send', {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -141,8 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
           .then(response => callMessage(true))
           .catch(error => callMessage(false));
-    }
-
+    };
+    
     function animation(duration) {
         let temp;
         return sel => {
@@ -158,5 +163,5 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         }
     }
-
 })
+
